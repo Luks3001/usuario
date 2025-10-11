@@ -1,9 +1,11 @@
 package com.lucas.usuario.controller;
 
 import com.lucas.usuario.business.UsuarioService;
+import com.lucas.usuario.business.ViaCepService;
 import com.lucas.usuario.business.dto.EnderecoDTO;
 import com.lucas.usuario.business.dto.TelefoneDTO;
 import com.lucas.usuario.business.dto.UsuarioDTO;
+import com.lucas.usuario.infrastructure.clients.ViaCepDTO;
 import com.lucas.usuario.infrastructure.entity.Usuario;
 import com.lucas.usuario.infrastructure.security.JwtUtil;
 import com.lucas.usuario.infrastructure.security.SecurityConfig;
@@ -19,13 +21,14 @@ import org.springframework.web.bind.annotation.*;
 @RestController
 @RequestMapping("/usuario")
 @RequiredArgsConstructor
-@Tag(name = "Usuarios", description = "Cadastro e login de usuarios")
+@Tag(name = "Tarefas", description = "Cadastra tarefas de usuarios")
 @SecurityRequirement(name = SecurityConfig.SECURITY_SCHEME)
 public class UsuarioController {
 
     private final UsuarioService usuarioService;
     private final AuthenticationManager authenticationManager;
     private final JwtUtil jwtUtil;
+    private final ViaCepService viaCepService;
 
     @PostMapping
     public ResponseEntity <UsuarioDTO> salvaUsuario (@RequestBody UsuarioDTO usuarioDTO){
@@ -82,6 +85,12 @@ public class UsuarioController {
     public ResponseEntity<TelefoneDTO> cadastraTelefone (@RequestBody TelefoneDTO dto,
                                                          @RequestHeader ("Authorization") String token){
         return ResponseEntity.ok(usuarioService.cadastraTelefone(token, dto));
+    }
+
+    @GetMapping("/endereco/{cep}")
+    public ResponseEntity<ViaCepDTO> buscarDadosCep (@PathVariable ("cep") String cep ){
+        return ResponseEntity.ok(viaCepService.buscarDadosEndereco(cep));
+
     }
 
 }

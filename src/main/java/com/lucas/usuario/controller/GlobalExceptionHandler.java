@@ -1,5 +1,6 @@
 package com.lucas.usuario.controller;
 
+import com.lucas.usuario.infrastructure.exceptions.CepInvalidoException;
 import com.lucas.usuario.infrastructure.exceptions.ConflictException;
 import com.lucas.usuario.infrastructure.exceptions.ResourceNotFoundException;
 import com.lucas.usuario.infrastructure.exceptions.UnauthorizedException;
@@ -27,5 +28,11 @@ public class GlobalExceptionHandler {
         return new ResponseEntity<>(ex.getMessage(),HttpStatus.UNAUTHORIZED);
     }
 
+    @ExceptionHandler(CepInvalidoException.class)
+    public ResponseEntity<String>handlerCepInvalidoException (CepInvalidoException ex){
+        return new ResponseEntity<>(ex.getMessage(), HttpStatus.BAD_REQUEST);
+    }
+
 
 }
+
