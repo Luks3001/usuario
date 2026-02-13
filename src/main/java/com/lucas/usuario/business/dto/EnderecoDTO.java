@@ -1,6 +1,5 @@
 package com.lucas.usuario.business.dto;
 
-import jakarta.persistence.Column;
 import lombok.*;
 
 @Setter
