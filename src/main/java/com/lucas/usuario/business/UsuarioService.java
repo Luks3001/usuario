@@ -153,6 +153,13 @@ public class UsuarioService {
                 telefoneRepository.save(telefone)
         );
     }
+    public void deletaEndereco(Long idEndereco) {
+        enderecoRepository.deleteById(idEndereco);
+    }
+
+    public void deletaTelefone(Long idTelefone) {
+        telefoneRepository.deleteById(idTelefone);
+    }
 
 }
 

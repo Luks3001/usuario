@@ -87,5 +87,16 @@ public class UsuarioController {
         return ResponseEntity.ok(viaCepService.buscarDadosEndereco(cep));
 
     }
+    @DeleteMapping("/endereco")
+    public ResponseEntity<Void> deletaEndereco(@RequestParam("id") Long id) {
+        usuarioService.deletaEndereco(id);
+        return ResponseEntity.noContent().build();
+    }
+
+    @DeleteMapping("/telefone")
+    public ResponseEntity<Void> deletaTelefone(@RequestParam("id") Long id) {
+        usuarioService.deletaTelefone(id);
+        return ResponseEntity.noContent().build();
+    }
 
 }
